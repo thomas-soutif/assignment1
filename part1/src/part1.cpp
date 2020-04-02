@@ -64,7 +64,7 @@ GLuint createTriangleVAO()
     glBindVertexArray(vao);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glEnableVertexAttribArray(POSITION);
-    glVertexAttribPointer(POSITION, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glVertexAttribPointer(POSITION, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 
     return vao;
 }
@@ -89,7 +89,7 @@ void drawTriangle(GLuint program, GLuint vao)
 
 void display(Context &ctx)
 {
-    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClearColor(0.5,0.5,0.5, 0.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     drawTriangle(ctx.program, ctx.triangleVAO);
@@ -157,7 +157,6 @@ int main(void)
         display(ctx);
         glfwSwapBuffers(ctx.window);
     }
-
     // Shutdown
     glfwDestroyWindow(ctx.window);
     glfwTerminate();

@@ -1,0 +1,4 @@
+﻿  part3.cpp
+C:\Users\Legendary_Xelar\source\repos\thomas-soutif\assignment1\part3\src\part3.cpp(35,25): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\Legendary_Xelar\source\repos\thomas-soutif\assignment1\part3\src\part3.cpp(94,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  part3.vcxproj -> C:\Users\Legendary_Xelar\source\repos\thomas-soutif\assignment1\part3\build\Debug\part3.exe

@@ -61,18 +61,29 @@ void createTriangle(Context &ctx)
     // Generates the three vertices defining the triangle and puts them
     // in a vertex buffer object (VBO)
     const GLfloat vertices[] = {
-        0.0f, 0.5f, 0.0f,
-        -0.5f,-0.5f, 0.0f,
-        0.5f,-0.5f, 0.0f,
+        //vertices       //colors
+        0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+        -0.5f,-0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+        0.5f,-0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
     };
     glGenBuffers(1, &ctx.positionVBO);
     glBindBuffer(GL_ARRAY_BUFFER, ctx.positionVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
     glEnableVertexAttribArray(POSITION);
-    glVertexAttribPointer(POSITION, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind the VBO
+    glVertexAttribPointer(POSITION, 3, GL_FLOAT, GL_FALSE, 6* sizeof(float), nullptr);
 
+    glEnableVertexAttribArray(COLOR);
+    glVertexAttribPointer(COLOR, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3* sizeof(float))); // The last parameter we specify that the colors start at position 3
+
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind the VBO
     glBindVertexArray(ctx.defaultVAO); // unbind the VAO
+
+
+
+    int nrAttributes;
+    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+    std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
 }
 
 void drawTriangle(GLuint program, GLuint vao)
@@ -80,9 +91,11 @@ void drawTriangle(GLuint program, GLuint vao)
     glUseProgram(program);
 
     // Note: A program must be in use when we update its uniforms 
-    double elapsed_time = glfwGetTime();
+    float elapsed_time = glfwGetTime();
+   
     glUniform1f(glGetUniformLocation(program, "u_time"), float(elapsed_time));
-
+    float offset = 0.5f;
+    glUniform1f(glGetUniformLocation(program, "xOffSet"), float(offset));
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 

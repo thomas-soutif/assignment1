@@ -1,0 +1,26 @@
+﻿  Building Custom Rule C:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part1/CMakeLists.txt
+  part1.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\ostream(469,1): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\ostream(462): message : while compiling class template member function 'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(std::basic_streambuf<char,std::char_traits<char>> *)'
+C:\Users\Legendary_Xelar\source\repos\thomas-soutif\assignment1\part1\src\utils.h(15): message : see reference to function template instantiation 'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(std::basic_streambuf<char,std::char_traits<char>> *)' being compiled
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\ostream(638): message : see reference to class template instantiation 'std::basic_ostream<char,std::char_traits<char>>' being compiled
+  lodepng.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\istream(513,1): warning C4530: C++ exception handler used, but unwind semantics are not enabled. Specify /EHsc
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\istream(507): message : while compiling class template member function 'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::read(_Elem *,std::streamsize)'
+          with
+          [
+              _Elem=char
+          ]
+C:\Users\Legendary_Xelar\source\repos\thomas-soutif\assignment1\external\lodepng\lodepng.cpp(6018): message : see reference to function template instantiation 'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::read(_Elem *,std::streamsize)' being compiled
+          with
+          [
+              _Elem=char
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\istream(692): message : see reference to class template instantiation 'std::basic_istream<char,std::char_traits<char>>' being compiled
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_glfw_gl3.cpp
+  Generating Code...
+  glew.c
+  part1.vcxproj -> C:\Users\Legendary_Xelar\source\repos\thomas-soutif\assignment1\part1\build\Release\part1.exe

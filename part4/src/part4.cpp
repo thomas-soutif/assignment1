@@ -24,6 +24,7 @@ struct Context {
     GLFWwindow *window;
     GLuint program;
     GLuint triangleVAO;
+    GLuint quadriVAO;
     GLuint positionVBO;
     GLuint colorVBO;
     GLuint defaultVAO;
@@ -61,10 +62,25 @@ void createTriangle(Context &ctx)
     // Generates the three vertices defining the triangle and puts them
     // in a vertex buffer object (VBO)
     const GLfloat vertices[] = {
-        0.0f, 0.5f, 0.0f,
-        -0.5f,-0.5f, 0.0f,
-        0.5f,-0.5f, 0.0f,
+        -1.0f, -1.0f, 0.0f, // bottom left
+         1.0f, -1.0f, 0.0f, // bottom right
+        1.0f, 1.0f, 0.0f, // top right
+
+         -1.0f, -1.0f, 0.0f, // bottom left
+         1.0f, 1.0f, 0.0f, // top right
+         -1.0f, 1.0f, 0.0f, // top left
     };
+    
+    const GLfloat colors[] = {
+       1.0f, 0.0f, 0.0f,
+       0.0f, 1.0f, 0.0f,
+       0.0f, 0.0f, 1.0f,
+
+       1.0f, 0.0f, 0.0f,
+       0.0f, 0.0f, 1.0f,
+       0.0f, 1.0f, 0.0f,
+    };
+
     glGenBuffers(1, &ctx.positionVBO);
     glBindBuffer(GL_ARRAY_BUFFER, ctx.positionVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -72,7 +88,64 @@ void createTriangle(Context &ctx)
     glVertexAttribPointer(POSITION, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
     glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind the VBO
 
+    glGenBuffers(1, &ctx.colorVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, ctx.colorVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(COLOR);
+    glVertexAttribPointer(COLOR, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind the VBO
+
     glBindVertexArray(ctx.defaultVAO); // unbind the VAO
+}
+
+void createQuadrilateral(Context &ctx)
+{
+    glGenVertexArrays(1, &ctx.quadriVAO);
+    glBindVertexArray(ctx.quadriVAO);
+
+
+    const GLfloat quadrilateral[] = {
+        -1.0f, -1.0f, 0.0f, // bottom left
+        1.0f, -1.0f, 0.0f, // bottom right
+        1.0f, 1.0f, 0.0f, // top right
+        -1.0f, 1.0f, 0.0f, // top left
+    };
+    const GLint indices[] = { 
+        0, 1, 2,3,1,2,0,3
+    };
+
+    const GLfloat colors[] = {
+       1.0f, 1.0f, 1.0f,
+      1.0f, 1.0f, 1.0f,
+       1.0f, 1.0f, 1.0f,
+    };
+
+    GLuint VBO, EBO;
+    glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
+   
+    glBindBuffer(GL_ARRAY_BUFFER, VBO); // vertices of quadri
+    glBufferData(GL_ARRAY_BUFFER, sizeof(quadrilateral), quadrilateral, GL_STATIC_DRAW);
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO); // order of the vertices
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+   
+    glEnableVertexAttribArray(POSITION);
+    glVertexAttribPointer(POSITION,3,GL_FLOAT,GL_FALSE,0,nullptr);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind the VBO
+
+
+    glGenBuffers(1, &ctx.colorVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, ctx.colorVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(COLOR);
+    glVertexAttribPointer(COLOR, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // unbind the VBO
+
+    glBindVertexArray(ctx.defaultVAO); // unbind the VAO
+
+
 }
 
 void drawTriangle(GLuint program, GLuint vao)
@@ -80,8 +153,18 @@ void drawTriangle(GLuint program, GLuint vao)
     glUseProgram(program);
 
     glBindVertexArray(vao);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 
+    glUseProgram(0);
+}
+
+void drawQuadri(GLuint program, GLuint vao)
+{
+    glUseProgram(program);
+    glBindVertexArray(vao);
+    
+
+    glDrawElements(GL_LINES, 8, GL_UNSIGNED_INT, 0);
     glUseProgram(0);
 }
 
@@ -91,6 +174,7 @@ void init(Context &ctx)
                                     shaderDir() + "triangle.frag");
 
     createTriangle(ctx);
+    createQuadrilateral(ctx);
 }
 
 void display(Context &ctx)
@@ -99,6 +183,7 @@ void display(Context &ctx)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     drawTriangle(ctx.program, ctx.triangleVAO);
+    drawQuadri(ctx.program, ctx.quadriVAO);
 }
 
 void reloadShaders(Context *ctx)

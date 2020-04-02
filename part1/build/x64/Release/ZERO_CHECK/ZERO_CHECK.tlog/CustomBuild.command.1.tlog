@@ -1,0 +1,10 @@
+^C:\USERS\LEGENDARY_XELAR\SOURCE\REPOS\THOMAS-SOUTIF\ASSIGNMENT1\PART1\BUILD\CMAKEFILES\9E9D22D76A471FE39CF391F2D3A909DF\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part1 -BC:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part1/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part1/build/part1.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

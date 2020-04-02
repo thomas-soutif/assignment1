@@ -1,0 +1,8 @@
+C:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part4/build/CMakeFiles/INSTALL.dir
+C:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part4/build/CMakeFiles/part4.dir
+C:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part4/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part4/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part4/build/glfw/CMakeFiles/INSTALL.dir
+C:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part4/build/glfw/CMakeFiles/ALL_BUILD.dir
+C:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part4/build/glfw/src/CMakeFiles/glfw.dir
+C:/Users/Legendary_Xelar/source/repos/thomas-soutif/assignment1/part4/build/glfw/src/CMakeFiles/INSTALL.dir
